@@ -1,6 +1,7 @@
 import streamlit as st
 from google.cloud import bigquery
 import pandas as pd
+import os
 
 # Initialize BigQuery client
 def initialize_bigquery_client( json_key_path):
