@@ -4,8 +4,17 @@ import pandas as pd
 
 # Initialize BigQuery client
 def initialize_bigquery_client( json_key_path):
-    client = bigquery.Client.from_service_account_json('cb-comp-eng.json')
-    return client
+    try:
+        # client = bigquery.Client.from_service_account_json('cb-comp-eng.json')
+        # return client
+        api_json=os.getenv('SA')
+        credentials = service_account.Credentials.from_service_account_info(eval(json_key_string))
+        client = bigquery.Client(credentials=credentials, project=credentials.project_id)
+        return client
+    except Exception as e:
+        st.error(f"Failed to authenticate with the provided JSON: {e}")
+        return None
+    
 
 # Query BigQuery table
 def query_bigquery_table(client, table_name):
