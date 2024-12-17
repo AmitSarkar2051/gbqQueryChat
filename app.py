@@ -5,12 +5,12 @@ import pandas as pd
 import os
 
 # Initialize BigQuery client
-def initialize_bigquery_client( json_key_path):
+def initialize_bigquery_client(json_key_path):
     try:
         # client = bigquery.Client.from_service_account_json('cb-comp-eng.json')
         # return client
         api_json=os.getenv('SA')
-        credentials = service_account.Credentials.from_service_account_info(eval(json_key_string))
+        credentials = service_account.Credentials.from_service_account_info(eval(api_json))
         client = bigquery.Client(credentials=credentials, project=credentials.project_id)
         return client
     except Exception as e:
